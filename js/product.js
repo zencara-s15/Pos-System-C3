@@ -64,9 +64,17 @@ function addProduct(event) {
 }
 
 // show add product form 
-
 function add_product_form() {
+  hide(orderForm)
   show(productForm)
+}
+
+// show order product form 
+
+function order_product(){
+  hide(productForm)
+  show(orderForm)
+
 }
 
 let productName = document.querySelector('#product-name');
@@ -78,6 +86,7 @@ let productDescription = document.querySelector("#product-description");
 
 // form to add product 
 let productForm = document.querySelector(".addProductForm");
+let orderForm = document.querySelector(".order-form");
 
 // console.log(productForm)
 
@@ -86,5 +95,10 @@ addBtn.addEventListener("click", addProduct);
 
 let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
+
+let showOrderProductForm = document.querySelector("#display-order-form");
+showOrderProductForm.addEventListener("click" , order_product)
+
+
 
 loadProducts();
