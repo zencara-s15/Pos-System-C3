@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="js/main.js"></script>
 </head>
 
 <body>
@@ -53,11 +55,42 @@
             </div>
         </header>
         <div id="main">
-            <div class="menu">
+            <div class="product-menu">
+                <button id="add-product">Click me to add product</button>
                 <!-- TODO -->
             </div>
+
+            <!-- fromduct form neeed to show when Click -->
+
+            <div class="addProductForm" style="display: block;">
+                <h2 class="form-title">Add new product</h2>
+    
+                <div class="form-group">
+                    <input placeholder="Product Name" type="text" class="form-input" id="product-name" value="">
+                    <!-- requre="" -->
+                    <input placeholder="Net Price" type="number" class="form-input" id="net-price" value="">
+                    <input placeholder="Gross Price" type="number" class="form-input" id="product-price" value="">
+    
+                    <select class="form-input" id="product-catergory">
+                        <option value="Select Catergory">Select Catergory</option>
+                        <option value="food">FOOOD </option>
+                        <option value="drink">DRINK</option>
+                        <option value="extra">EXTRA</option>
+                    </select>
+    
+                    <input placeholder="Quantity" type="number" class="form-input" id="product-qty">
+                    <textarea placeholder="Description" name="feedback" class="form-input"
+                        id="product-description"></textarea>
+                    <div class="btn">
+                        <button id="form-submit-btn" class="form-submit-btn">Add++</button>
+                        <button id="form-cancel-btn" class="form-cancel-btn">Cancel</button>
+                    </div>
+                    
+                </div>
+            </div>
+
             <div class="product">
-                <div class="card-1">
+                <!-- <div class="card-1" >
                     <div class="card1-left">
                         <p>Banana</p>
                     </div>
@@ -96,7 +129,7 @@
                                 shopping_cart
                             </span></span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
