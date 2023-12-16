@@ -93,7 +93,25 @@ header {
     justify-content: center;
     align-items: center; */
 }
+#product-table {
+    /* margin-left: 15%; */
+    width: 100%;
+    border-collapse: collapse;
+}
+thead {
+    background: #0fabb1;
+    color: #fff;
+}
 
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+td img{
+    width:20px;
+    height: 20px;
+}
 .product-menu{
     background-color: cyan;
     display: flex;

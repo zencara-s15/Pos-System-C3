@@ -62,6 +62,80 @@ function addProduct(event) {
   saveProducts();
   clearForm();
 }
+// remove products
+function removeRow(e) {
+
+  
+
+  let isRemove = window.confirm("Are you sure about that?");
+  if(isRemove) {
+    e.target.closest('tr').remove();
+    products.splice(e.target.id,1)
+  }
+  
+  let btnRemove = document.querySelectorAll('.deleteAction');
+  
+  for( let btn of btnRemove) {
+    btn.addEventListener('click', removeRow);
+
+  }
+  saveProducts()
+  loadProducts()
+}
+
+
+// show product to table 
+let tbody = document.querySelector("tbody");
+
+function renderProducts() {
+
+  let productsStorage = JSON.parse(localStorage.getItem("products"));
+  if (productsStorage !== null) {
+    products = productsStorage;
+    for (let i = 0; i < products.length; i++) {
+      let product = products[i];
+      let tableRow = document.createElement('tr');
+      
+      let tdID = document.createElement('td');
+      tdID.textContent = i + 1;
+      
+      let tdName = document.createElement('td');
+      tdName.textContent = product.name;
+      
+      let tdCategory = document.createElement('td');
+      tdCategory.textContent = product.category;
+      
+      let tdPrice = document.createElement('td');
+      tdPrice.textContent = product.price;
+      
+      let tdAmount = document.createElement('td');
+      tdAmount.textContent = product.qty;
+
+      let tdManage = document.createElement('td');
+
+      let deleteAction = document.createElement("img");
+      deleteAction.id = i
+      deleteAction.src ='../IMG/Delete.png';
+      tdManage.appendChild(deleteAction);
+      deleteAction.addEventListener('click', removeRow);
+
+      let editAction = document.createElement("img");
+      editAction.src = "../IMG/edit.png";
+      // editAction.addEventListener("click");
+      tdManage.appendChild(editAction);
+      
+      tableRow.appendChild(tdID);
+      tableRow.appendChild(tdName);
+      tableRow.appendChild(tdCategory);
+      tableRow.appendChild(tdPrice);
+      tableRow.appendChild(tdAmount);
+      tableRow.appendChild(tdManage);
+      
+      tbody.appendChild(tableRow);
+    }
+  }
+}
+
 
 // show add product form 
 function add_product_form() {
@@ -100,5 +174,5 @@ let showOrderProductForm = document.querySelector("#display-order-form");
 showOrderProductForm.addEventListener("click" , order_product)
 
 
-
+renderProducts();
 loadProducts();
