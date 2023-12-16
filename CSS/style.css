@@ -120,7 +120,7 @@ td img{
 .product-menu .form-input{
     width: 30%;
 }
-
+/* 
 .card-1 {
     background: thistle;
     height: 10vh;
@@ -208,6 +208,7 @@ img {
     align-items: center;
     margin-left: 600px;
 }
+*/
 
 .nav-left {
     background-color: goldenrod;
@@ -215,7 +216,7 @@ img {
     display: flex;
     flex-direction: column;
 }
-.profile {
+/* .profile {
     display: flex;
     align-items: center;
     margin: 20px;
@@ -224,7 +225,7 @@ img {
 .booking {
     display: flex;
     margin: 15px;
-}
+} */ 
 
 
 /* aDdd product form ---------------------------------------------------- */
