@@ -27,7 +27,7 @@ function loadProducts() {
   }
 }
 
-function clearForm(){
+function clearForm() {
   productName.value = ""
   productNetPrice.value = ""
   productPrice.value = ""
@@ -65,17 +65,17 @@ function addProduct(event) {
 // remove products
 function removeRow(e) {
 
-  
+
 
   let isRemove = window.confirm("Are you sure about that?");
-  if(isRemove) {
+  if (isRemove) {
     e.target.closest('tr').remove();
-    products.splice(e.target.id,1)
+    products.splice(e.target.id, 1)
   }
-  
+
   let btnRemove = document.querySelectorAll('.deleteAction');
-  
-  for( let btn of btnRemove) {
+
+  for (let btn of btnRemove) {
     btn.addEventListener('click', removeRow);
 
   }
@@ -95,19 +95,19 @@ function renderProducts() {
     for (let i = 0; i < products.length; i++) {
       let product = products[i];
       let tableRow = document.createElement('tr');
-      
+
       let tdID = document.createElement('td');
       tdID.textContent = i + 1;
-      
+
       let tdName = document.createElement('td');
       tdName.textContent = product.name;
-      
+
       let tdCategory = document.createElement('td');
       tdCategory.textContent = product.category;
-      
+
       let tdPrice = document.createElement('td');
       tdPrice.textContent = product.price;
-      
+
       let tdAmount = document.createElement('td');
       tdAmount.textContent = product.qty;
 
@@ -115,7 +115,7 @@ function renderProducts() {
 
       let deleteAction = document.createElement("img");
       deleteAction.id = i
-      deleteAction.src ='../IMG/Delete.png';
+      deleteAction.src = '../IMG/Delete.png';
       tdManage.appendChild(deleteAction);
       deleteAction.addEventListener('click', removeRow);
 
@@ -123,19 +123,39 @@ function renderProducts() {
       editAction.src = "../IMG/edit.png";
       // editAction.addEventListener("click");
       tdManage.appendChild(editAction);
-      
+
       tableRow.appendChild(tdID);
       tableRow.appendChild(tdName);
       tableRow.appendChild(tdCategory);
       tableRow.appendChild(tdPrice);
       tableRow.appendChild(tdAmount);
       tableRow.appendChild(tdManage);
-      
+
       tbody.appendChild(tableRow);
     }
   }
 }
+//search products
 
+function searchProduct(event) {
+  let searchText = event.target.value.toLowerCase();
+  let tbody = document.getElementsByTagName("tbody")[0];
+  let tdElements = tbody.querySelectorAll("tr");
+
+  tdElements.forEach(function (tdElement) {
+    let productName = tdElement.firstElementChild.nextElementSibling.textContent.toLowerCase();
+    if (productName.includes(searchText)) {
+      tdElement.style.display = "";
+    } else {
+      tdElement.style.display = "none";
+    }
+  });
+}
+
+let searchProductInput = document
+  .getElementById("search-product")
+  .querySelector("input");
+searchProductInput.addEventListener("keyup", searchProduct);
 
 // show add product form 
 function add_product_form() {
@@ -145,10 +165,9 @@ function add_product_form() {
 
 // show order product form 
 
-function order_product(){
+function order_product() {
   hide(productForm)
   show(orderForm)
-
 }
 
 let productName = document.querySelector('#product-name');
@@ -156,7 +175,7 @@ let productNetPrice = document.querySelector("#net-price");
 let productPrice = document.querySelector("#product-price");
 let productCatergory = document.querySelector("#product-catergory");
 let productQty = document.querySelector("#product-qty");
-let productDescription = document.querySelector("#product-description"); 
+let productDescription = document.querySelector("#product-description");
 
 // form to add product 
 let productForm = document.querySelector(".addProductForm");
@@ -171,8 +190,7 @@ let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
 
 let showOrderProductForm = document.querySelector("#display-order-form");
-showOrderProductForm.addEventListener("click" , order_product)
-
+showOrderProductForm.addEventListener("click", order_product)
 
 renderProducts();
 loadProducts();
