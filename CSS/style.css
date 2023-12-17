@@ -376,3 +376,27 @@ button:active {
     box-shadow: inset 0px 0.1em 0.6em #b9bac7;
     transform: translateY(0em);
 }
+/* add dashboard */
+.text {
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #003049;
+}
+.heading {
+    display: flex;
+    justify-content: space-evenly;
+}
+.heading h2 {
+    border: 2px solid #003049;
+    border-radius: 10px ;
+    padding: 10px;
+    margin: 20px;
+    color: #003049;
+}
+#product-table, h3{
+    color: #003049;
+    font-weight:600;
+    margin-bottom:20px;
+}
