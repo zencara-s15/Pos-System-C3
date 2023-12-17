@@ -65,8 +65,6 @@ function addProduct(event) {
 // remove products
 function removeRow(e) {
 
-
-
   let isRemove = window.confirm("Are you sure about that?");
   if (isRemove) {
     e.target.closest('tr').remove();
