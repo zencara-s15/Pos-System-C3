@@ -13,7 +13,7 @@ body {
     display: flex;
 }
 nav {
-    flex: 0.2;
+    width: 7%;;
     height: 100vh;
     background-color: #003049;
     position: sticky;
@@ -90,16 +90,11 @@ header {
 
 }
 
-
-
-
 #main {
     background-color: brown;
     height: 100vh;
     width: 100%;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+
 }
 #product-table {
     /* margin-left: 15%; */
@@ -128,113 +123,14 @@ td img{
 .product-menu .form-input{
     width: 30%;
 }
-/* 
-.card-1 {
-    background: thistle;
-    height: 10vh;
-    width: 100%;
-    display: flex;
-}
 
-.card-1 button {
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-    border: none;
-}
-
-.card1-left {
-    background: rgba(59, 115, 176, 0.71);
-    width: 30%;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-}
-
-.card1-center {
-    background: rgba(59, 115, 176, 0.71);
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card1-right {
-    background: rgba(59, 115, 176, 0.71);
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.card-2 {
-    background: thistle;
-    height: 10vh;
-    width: 100%;
-    display: flex;
-}
-
-.card-2 button {
-    background-color: #547D91;
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-    border: none;
-}
-
-.card2-left {
-    background: white;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-}
-
-.card2-center {
-    background: white;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card2-right {
-    background: white;
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-img {
-    width: 45px;
-    margin-right: 20px;
-}
-
-.count {
-    display: flex;
-    align-items: center;
-    margin-left: 600px;
-}
-*/
 
 .nav-left {
     background-color: goldenrod;
-    width: 25%;
+    /* width: 25%; */
     display: flex;
     flex-direction: column;
 }
-/* .profile {
-    display: flex;
-    align-items: center;
-    margin: 20px;
-    justify-content: space-evenly;
-}
-.booking {
-    display: flex;
-    margin: 15px;
-} */ 
-
 
 /* aDdd product form ---------------------------------------------------- */
 
@@ -384,4 +280,28 @@ button:hover {
 button:active {
     box-shadow: inset 0px 0.1em 0.6em #b9bac7;
     transform: translateY(0em);
+}
+/* add dashboard */
+.text {
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #003049;
+}
+.heading {
+    display: flex;
+    justify-content: space-evenly;
+}
+.heading h2 {
+    border: 2px solid #003049;
+    border-radius: 10px ;
+    padding: 10px;
+    margin: 20px;
+    color: #003049;
+}
+#product-table, h3{
+    color: #003049;
+    font-weight:600;
+    margin-bottom:20px;
 }
