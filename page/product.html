@@ -55,7 +55,7 @@
                         <!-- <span class="material-symbols-outlined"
                             style="position: absolute; color: gray; padding-top: 30px; margin-left: 63%; cursor: pointer;">mic</span> -->
                         <input type="text" name="text" id="text" placeholder="Search for product....."
-                            style="padding-left: 45px; padding-right: 40px;">
+                            style="padding-left: 25px; padding-right: 25px;">
                     </div>
                 </div>
             </header>
@@ -65,12 +65,19 @@
                     <button id="display-add-form">Click me to add product</button>
                     <button id="display-order-form">Click me to order product</button>
 
-                    <select class="form-input" id="product-catergory">
+                    <!-- <select class="form-input" id="product-catergory">
                         <option value="Select Catergory">Select Catergory</option>
                         <option value="food">FOOOD </option>
                         <option value="drink">DRINK</option>
                         <option value="extra">EXTRA</option>
-                    </select>
+                    </select> -->
+
+                    <input list="Categorys" name="Category" class="form-input" id="product-catergory" placeholder="Select Category">
+                    <datalist id="Categorys">
+                        <option value="Food">
+                        <option value="Drink">
+                        <option value="Extra">
+                    </datalist>
                 </div>
                 <table id="product-table">
                     <thead>
