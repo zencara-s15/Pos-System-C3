@@ -58,7 +58,7 @@ function addProduct(event) {
   } else {
     products.push(newProduct);
   }
-
+  location.reload()
   saveProducts();
   clearForm();
 }
