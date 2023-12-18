@@ -14,7 +14,7 @@ body {
 }
 nav {
     width: 8%;;
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #003049;
     font-size: medium;
     font-weight: 500;
@@ -65,13 +65,12 @@ nav div {
 .container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     flex: 2;
     background-color: #547D91;
 }
 #main {
-    /* background-color: brown; */
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     /* display: flex;
     justify-content: center;
