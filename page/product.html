@@ -29,7 +29,7 @@
                     <p>Product</p>
                 </div>
                 <div>
-                    <li><a href="#"><span class="material-symbols-outlined">history</span></a></li>
+                    <li><a href="category.html"><span class="material-symbols-outlined">history</span></a></li>
                     <p>Category</p>
                 </div>
                 <div>
@@ -50,10 +50,7 @@
             <header>
                 <div class="header-left">
                     <div id="search-product">
-                        <!-- <span class="material-symbols-outlined" -->
-                            <!-- style="position: absolute; color: rgb(0, 0, 0); padding-top: 20px; margin-left: 45px; cursor: pointer;">search</span> -->
-                        <!-- <span class="material-symbols-outlined"
-                            style="position: absolute; color: gray; padding-top: 30px; margin-left: 63%; cursor: pointer;">mic</span> -->
+                        
                         <input type="text" name="text" id="text" placeholder="Search for product....."
                             style="padding-left: 25px; padding-right: 25px;">
                     </div>
@@ -65,19 +62,9 @@
                     <button id="display-add-form">Click me to add product</button>
                     <button id="display-order-form">Click me to order product</button>
 
-                    <!-- <select class="form-input" id="product-catergory">
-                        <option value="Select Catergory">Select Catergory</option>
-                        <option value="food">FOOOD </option>
-                        <option value="drink">DRINK</option>
-                        <option value="extra">EXTRA</option>
-                    </select> -->
-
-                    <input list="Categorys" name="Category" class="form-input" id="product-catergory" placeholder="Select Category">
-                    <datalist id="Categorys">
-                        <option value="Food">
-                        <option value="Drink">
-                        <option value="Extra">
-                    </datalist>
+                    <select class="form-input" id="product-categories2">
+                        <option value="">All Product</option>
+                    </select>
                 </div>
                 <table id="product-table">
                     <thead>
@@ -89,7 +76,6 @@
                             <th>Amount</th>
                             <th>Manage</th>
                         </tr>
-                        <div class="delet"></div>
                     </thead>
                     <tbody>
                         <!-- <tr>
@@ -114,14 +100,11 @@
                     <input placeholder="Net Price" type="number" class="form-input" id="net-price" value="">
                     <input placeholder="Gross Price" type="number" class="form-input" id="product-price" value="">
 
-                    <select class="form-input" id="product-catergory">
-                        <option value="Select Catergory">Select Catergory</option>
-                        <option value="food">FOOOD </option>
-                        <option value="drink">DRINK</option>
-                        <option value="extra">EXTRA</option>
+                    <select class="form-input" id="product-categories">
                     </select>
 
                     <input placeholder="Quantity" type="number" class="form-input" id="product-qty">
+
                     <textarea placeholder="Description" name="feedback" class="form-input"
                         id="product-description"></textarea>
                     <div class="btn">

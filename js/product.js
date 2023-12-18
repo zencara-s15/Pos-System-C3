@@ -13,6 +13,7 @@ function show(element) {
 // Data----------------------------
 
 let products = [];
+let categories = [];
 
 // Local Storage
 
@@ -26,6 +27,31 @@ function loadProducts() {
     products = productStorage;
   }
 }
+
+
+// categoryView 
+function displayCategory(element) {
+
+  const storedCategories = localStorage.getItem('categories');
+
+  if (storedCategories !== null) {
+    categories = JSON.parse(storedCategories);
+
+    for (let i = 0; i < categories.length; i++) {
+      let newOption = document.createElement('option');
+      newOption.value = categories[i].name;
+      newOption.textContent = categories[i].name;
+      element.appendChild(newOption)
+    }
+  }
+}
+
+function categoryView(){
+  displayCategory(document.querySelector("#product-categories"))
+  displayCategory(document.querySelector("#product-categories2"))
+}
+
+// clearForm after input 
 
 function clearForm() {
   productName.value = ""
@@ -58,14 +84,12 @@ function addProduct(event) {
   } else {
     products.push(newProduct);
   }
-
+  location.reload()
   saveProducts();
   clearForm();
 }
 // remove products
 function removeRow(e) {
-
-
 
   let isRemove = window.confirm("Are you sure about that?");
   if (isRemove) {
@@ -134,6 +158,7 @@ function renderProducts() {
       tbody.appendChild(tableRow);
     }
   }
+
 }
 //search products
 
@@ -173,7 +198,7 @@ function order_product() {
 let productName = document.querySelector('#product-name');
 let productNetPrice = document.querySelector("#net-price");
 let productPrice = document.querySelector("#product-price");
-let productCatergory = document.querySelector("#product-catergory");
+let productCatergory = document.querySelector("#product-categories");
 let productQty = document.querySelector("#product-qty");
 let productDescription = document.querySelector("#product-description");
 
@@ -181,8 +206,7 @@ let productDescription = document.querySelector("#product-description");
 let productForm = document.querySelector(".addProductForm");
 let orderForm = document.querySelector(".order-form");
 
-// console.log(productForm)
-
+// btn  and addEventlistener
 let addBtn = document.querySelector("#form-submit-btn");
 addBtn.addEventListener("click", addProduct);
 
@@ -190,7 +214,8 @@ let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
 
 let showOrderProductForm = document.querySelector("#display-order-form");
-showOrderProductForm.addEventListener("click", order_product)
+showOrderProductForm.addEventListener("click", order_product);
 
+categoryView();
 renderProducts();
 loadProducts();
