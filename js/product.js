@@ -198,7 +198,7 @@ function order_product() {
 let productName = document.querySelector('#product-name');
 let productNetPrice = document.querySelector("#net-price");
 let productPrice = document.querySelector("#product-price");
-let productCatergory = document.querySelector("#product-catergory");
+let productCatergory = document.querySelector("#product-categories");
 let productQty = document.querySelector("#product-qty");
 let productDescription = document.querySelector("#product-description");
 
