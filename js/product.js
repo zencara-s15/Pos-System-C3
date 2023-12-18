@@ -139,7 +139,7 @@ function searchProduct(event) {
   let searchText = event.target.value.toLowerCase();
   let tbody = document.getElementsByTagName("tbody")[0];
   let tdElements = tbody.querySelectorAll("tr");
-
+  
   tdElements.forEach(function (tdElement) {
     let productName = tdElement.firstElementChild.nextElementSibling.textContent.toLowerCase();
     if (productName.includes(searchText)) {
