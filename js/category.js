@@ -13,11 +13,11 @@ let categories = [];
 
 // Local Storage
 
-function saveProducts() {
+function saveCategory() {
     localStorage.setItem("categories", JSON.stringify(categories));
 }
 
-function loadProducts() {
+function loadCategory() {
     let categoryStorage = JSON.parse(localStorage.getItem("categories"));
     if (categoryStorage !== null) {
         categories = categoryStorage;
@@ -34,7 +34,7 @@ function createCategory(event) {
     newCategory.name = categoryName.value;
     newCategory.id = categoryId.value;
     categories.push(newCategory);
-    saveProducts();
+    saveCategory();
     location.reload();
 }
 
@@ -62,7 +62,7 @@ function updateCategory(event) {
 
     categories[update_category] = updatedCategory;
 
-    saveProducts();
+    saveCategory();
 
     update_category = null;
     categoryName.value = "";
@@ -90,8 +90,8 @@ function removeRow(e) {
         btn.addEventListener("click", removeRow);
     }
 
-    saveProducts();
-    loadProducts();
+    saveCategory();
+    loadCategory();
 }
 
 let tbody = document.querySelector("tbody");
