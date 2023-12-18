@@ -13,11 +13,11 @@ body {
     display: flex;
 }
 nav {
-    width: 7%;;
+    width: 8%;;
     height: 100vh;
     background-color: #003049;
-    position: sticky;
-    top: 0;
+    font-size: medium;
+    font-weight: 500;
 }
 
 nav span {
@@ -73,6 +73,7 @@ nav div {
 header {
     display: flex;
     height: 15vh;
+    background-color: #003049;
 }
 
 .header-left {
@@ -91,10 +92,8 @@ header {
 }
 
 #main {
-    background-color: brown;
     height: 100vh;
     width: 100%;
-
 }
 #product-table {
     /* margin-left: 15%; */
@@ -102,7 +101,7 @@ header {
     border-collapse: collapse;
 }
 thead {
-    background: #0fabb1;
+    background: #003049;
     color: #fff;
 }
 
@@ -114,19 +113,34 @@ th, td {
 td img{
     width:20px;
     height: 20px;
+    margin-left: 30px;
 }
 .product-menu{
-    background-color: cyan;
+    background-color: #547D91;
     display: flex;
     justify-content: center;
 }
 .product-menu .form-input{
-    width: 30%;
+    width: 40%;
+    background-color: white;
+    color: #003049;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-left: 100px;
 }
 
+.product-menu .form-input:focus{
+    outline: none;
+    background-color: white;
+}
+
+.product-menu .form-input::placeholder{
+    color: #003049;
+}
 
 .nav-left {
-    background-color: goldenrod;
+    background-color: #003049;
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -208,12 +222,12 @@ td img{
     transition: background-color 0.3s ease-in-out;
 
 }
-.order-header {
+/* .order-header {
     padding: 10px;
     background-color: red;
     display: flex;
     justify-content: space-between;
-}
+} */
 
 .order-body {
     gap: 10px;
@@ -256,52 +270,74 @@ td img{
 }
 
 button {
-    font-size: 18px;
+    --color: #003049;
+    color: var(--color);
     display: inline-block;
-    outline: 0;
-    border: 0;
-    cursor: pointer;
-    will-change: box-shadow, transform;
-    background: rgb(239, 239, 239);
-    box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
-    padding: 0 15px 0 15px;
-    border-radius: 5px;
-    color: black;
-    height: 30px;
-    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-}
-
-button:hover {
-    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #f7f7f7;
-    transform: translateY(-0.1em);
-}
-
-button:active {
-    box-shadow: inset 0px 0.1em 0.6em #b9bac7;
-    transform: translateY(0em);
-}
+    width: 9em;
+    height: 2.3em;
+    line-height: 2.5em;
+    overflow: hidden;
+    margin: 20px;
+    font-size: 17px;
+    font-weight: 600;
+    z-index: 1;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  button::before {
+    position: absolute;
+    content: "";
+    background: var(--color);
+    width: 210px;
+    height: 210px;
+    z-index: -1;
+    border-radius: 100%;
+  }
+  
+  button:hover {
+    color: white;
+  }
+  
+  button:before {
+    top: 100%;
+    left: 100%;
+    transition: .5s all;
+  }
+  
+  button:hover::before {
+    top: -30px;
+    left: -30px;
+  }
 /* add dashboard */
+.count-product {
+    background-color: #003049;
+}
 .text {
     display: flex;
     justify-content: space-evenly;
     margin-right: 10px;
     margin-top: 10px;
-    color: #003049;
+    color: white;
+    font-size:x-large;
 }
 .heading {
     display: flex;
     justify-content: space-evenly;
 }
 .heading h2 {
-    border: 2px solid #003049;
+    border: 2px solid white;
     border-radius: 10px ;
     padding: 10px;
     margin: 20px;
-    color: #003049;
+    color: white;
 }
-#product-table, h3{
+.text-top-product {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
     color: #003049;
-    font-weight:600;
-    margin-bottom:20px;
+    font-size:x-large;
+    font-weight: 600;
 }
