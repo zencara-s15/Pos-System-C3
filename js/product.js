@@ -65,8 +65,6 @@ function addProduct(event) {
 // remove products
 function removeRow(e) {
 
-
-
   let isRemove = window.confirm("Are you sure about that?");
   if (isRemove) {
     e.target.closest('tr').remove();
@@ -141,7 +139,7 @@ function searchProduct(event) {
   let searchText = event.target.value.toLowerCase();
   let tbody = document.getElementsByTagName("tbody")[0];
   let tdElements = tbody.querySelectorAll("tr");
-
+  
   tdElements.forEach(function (tdElement) {
     let productName = tdElement.firstElementChild.nextElementSibling.textContent.toLowerCase();
     if (productName.includes(searchText)) {
