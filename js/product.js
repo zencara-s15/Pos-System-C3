@@ -13,7 +13,7 @@ function show(element) {
 // Data----------------------------
 
 let products = [];
-
+let categories = []
 // Local Storage
 
 function saveProducts() {
@@ -179,8 +179,7 @@ let productDescription = document.querySelector("#product-description");
 let productForm = document.querySelector(".addProductForm");
 let orderForm = document.querySelector(".order-form");
 
-// console.log(productForm)
-
+// btn  and addEventlistener
 let addBtn = document.querySelector("#form-submit-btn");
 addBtn.addEventListener("click", addProduct);
 
@@ -189,6 +188,7 @@ showAddProductForm.addEventListener("click", add_product_form);
 
 let showOrderProductForm = document.querySelector("#display-order-form");
 showOrderProductForm.addEventListener("click", order_product)
+
 
 renderProducts();
 loadProducts();

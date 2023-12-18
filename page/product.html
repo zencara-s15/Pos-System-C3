@@ -69,12 +69,12 @@
                         <option value="extra">EXTRA</option>
                     </select> -->
 
-                    <input list="Categorys" name="Category" class="form-input" id="product-catergory" placeholder="Select Category">
-                    <datalist id="Categorys">
-                        <option value="Food">
-                        <option value="Drink">
-                        <option value="Extra">
-                    </datalist>
+                    <select class="form-input" id="product-catergories">
+                        <option value="">Select Catergory</option>
+                        <option value="food">FOOOD </option>
+                        <option value="drink">DRINK</option>
+                        <option value="extra">EXTRA</option>
+                    </select>
                 </div>
                 <table id="product-table">
                     <thead>
@@ -86,7 +86,6 @@
                             <th>Amount</th>
                             <th>Manage</th>
                         </tr>
-                        <div class="delet"></div>
                     </thead>
                     <tbody>
                         <!-- <tr>
@@ -112,13 +111,14 @@
                     <input placeholder="Gross Price" type="number" class="form-input" id="product-price" value="">
 
                     <select class="form-input" id="product-catergory">
-                        <option value="Select Catergory">Select Catergory</option>
-                        <option value="food">FOOOD </option>
+                        <option value="">Select Catergory</option>
+                        <option value="food">FOOD </option>
                         <option value="drink">DRINK</option>
                         <option value="extra">EXTRA</option>
                     </select>
 
                     <input placeholder="Quantity" type="number" class="form-input" id="product-qty">
+
                     <textarea placeholder="Description" name="feedback" class="form-input"
                         id="product-description"></textarea>
                     <div class="btn">
