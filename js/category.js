@@ -122,7 +122,6 @@ function renderCategory() {
             let editAction = document.createElement("img");
             editAction.src = "../IMG/edit.png";
             editAction.id = i;
-            editAction.classList.add("update");
             editAction.addEventListener("click", editCategory); // Call the updater function with the index
             tdManage.appendChild(editAction);
 
