@@ -41,6 +41,9 @@ function createCategory(event) {
 let update_category = null;
 
 function editCategory(event) {
+
+    
+
     let index = event.target.id;
     update_category = index;
 
@@ -112,6 +115,7 @@ function renderCategory() {
             tdName.textContent = category.name;
 
             let tdManage = document.createElement("td");
+            tdManage.classList.add("manage");
 
             let deleteBtn = document.createElement('span');
             deleteBtn.className = "delete material-symbols-outlined";
@@ -122,7 +126,9 @@ function renderCategory() {
             let editAction = document.createElement("span");
             editAction.className = "edit material-symbols-outlined";
             editAction.textContent = "edit_document"; 
-            // editAction.addEventListener("click");
+            editAction.id = i;
+            editAction.addEventListener("click", editCategory); 
+
             tdManage.appendChild(editAction);
 
             tableRow.appendChild(tdID);

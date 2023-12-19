@@ -46,7 +46,7 @@ function displayCategory(element) {
   }
 }
 
-function categoryView(){
+function categoryView() {
   displayCategory(document.querySelector("#product-categories"))
   displayCategory(document.querySelector("#product-categories2"))
 }
@@ -64,8 +64,6 @@ function clearForm() {
 
 // Add 
 function addProduct(event) {
-
-  // hide(addProductForm)
 
   event.preventDefault();
 
@@ -88,6 +86,7 @@ function addProduct(event) {
   saveProducts();
   clearForm();
 }
+
 // remove products
 function removeRow(e) {
 
@@ -106,7 +105,6 @@ function removeRow(e) {
   saveProducts()
   loadProducts()
 }
-
 
 // show product to table 
 let tbody = document.querySelector("tbody");
@@ -135,13 +133,9 @@ function renderProducts() {
       let tdAmount = document.createElement('td');
       tdAmount.textContent = product.qty;
 
-      let tdManage = document.createElement('td');
+      let tdManage = document.createElement('td')
+      tdManage.classList.add("manage");
 
-      // let deleteAction = document.createElement("img");
-      // deleteAction.id = i
-      // deleteAction.src = '../IMG/Delete.png';
-      // deleteAction.className = "delete";
-      // tdManage.appendChild(deleteAction);
       let deleteBtn = document.createElement('span');
       deleteBtn.className = "delete material-symbols-outlined";
       deleteBtn.textContent = "delete";
@@ -150,11 +144,15 @@ function renderProducts() {
 
       let editAction = document.createElement("span");
       editAction.className = "edit material-symbols-outlined";
-      editAction.textContent = "edit_document"; 
+      editAction.textContent = "edit_document";
       // editAction.addEventListener("click");
       tdManage.appendChild(editAction);
 
-      tdManage.appendChild(editAction);
+      let cartAction = document.createElement("span");
+      cartAction.className = "cart material-symbols-outlined";
+      cartAction.textContent = "add_shopping_cart";
+      cartAction.addEventListener("click", order_product);
+      tdManage.appendChild(cartAction);
 
       tableRow.appendChild(tdID);
       tableRow.appendChild(tdName);
@@ -196,11 +194,138 @@ function add_product_form() {
   show(productForm)
 }
 
-// show order product form 
+const order_body = document.querySelector(".order-body");
+let totalPrice = 0;
+let quantity = 1;
 
-function order_product() {
-  hide(productForm)
-  show(orderForm)
+function order_product(event) {
+  hide(productForm);
+  show(orderForm);
+  show(document.querySelector("#purchase-btn"));
+
+  const tableRow = event.target.closest("tr");
+  const productName = tableRow.querySelector("td:nth-child(2)").textContent;
+  const productPrice = tableRow.querySelector("td:nth-child(4)").textContent;
+
+  // Check if the product is already in the order
+  const existingOrderCard = Array.from(order_body.getElementsByClassName('PO-title')).find(element => element.textContent === productName)?.closest(".order-card");
+
+  if (existingOrderCard) {
+
+    const orderQtySpan = existingOrderCard.querySelector("#order-qty");
+    const currentQuantity = parseInt(orderQtySpan.textContent);
+    const newQuantity = currentQuantity + 1;
+    orderQtySpan.textContent = newQuantity;
+
+    // Calculate the updated total price
+    totalPrice += parseInt(productPrice);
+    document.querySelector(".order-total").textContent =
+      "Total: " + totalPrice + "$";
+
+  } else {
+    // Create a new order card
+
+    const orderCardDiv = document.createElement("div");
+    orderCardDiv.classList.add("order-card");
+
+    const productOrderNameDiv = document.createElement("div");
+    productOrderNameDiv.classList.add("product-order-name");
+
+    const productNameSpan = document.createElement("span");
+    productNameSpan.classList.add("PO-title");
+    productNameSpan.textContent = productName;
+
+    const productPriceSpan = document.createElement("span");
+    productPriceSpan.classList.add("PO-price");
+    productPriceSpan.textContent = productPrice + "$";
+
+    productOrderNameDiv.appendChild(productNameSpan);
+    productOrderNameDiv.appendChild(productPriceSpan);
+
+    const poQtyDiv = document.createElement("div");
+    poQtyDiv.classList.add("PO-qty");
+
+    const orderQtySpan = document.createElement("span");
+    orderQtySpan.id = "order-qty";
+    orderQtySpan.textContent = quantity;
+
+    const minusButton = document.createElement("button");
+    minusButton.classList.add("minus-order");
+    minusButton.textContent = "-";
+    minusButton.addEventListener("click", function () {
+      decreaseQuantity(orderQtySpan);
+    });
+
+    const plusButton = document.createElement("button");
+    plusButton.classList.add("plus-order");
+    plusButton.textContent = "+";
+    plusButton.addEventListener("click", function () {
+      increaseQuantity(orderQtySpan);
+    });
+
+    const removeOrder = document.createElement("div");
+    removeOrder.classList.add("remove-order");
+
+    const deleteOrder = document.createElement('span');
+    deleteOrder.className = "deleteOrder material-symbols-outlined";
+    deleteOrder.textContent = "delete";
+    deleteOrder.addEventListener('click', removeRow);
+    removeOrder.appendChild(deleteOrder);
+
+
+
+    poQtyDiv.appendChild(minusButton);
+    poQtyDiv.appendChild(orderQtySpan);
+    poQtyDiv.appendChild(plusButton);
+    
+
+    orderCardDiv.appendChild(productOrderNameDiv);
+    orderCardDiv.appendChild(poQtyDiv);
+    orderCardDiv.appendChild(removeOrder);
+
+    order_body.appendChild(orderCardDiv);
+
+    totalPrice += parseInt(productPrice);
+    document.querySelector(".order-total").textContent =
+      "Total: " + totalPrice + "$";
+  }
+
+}
+// if click minus button -price 
+
+function decreaseQuantity(element) {
+  let quantity = parseInt(element.textContent);
+  if (quantity > 1) {
+    quantity--;
+    element.textContent = quantity;
+    updateTotalPrice();
+  }
+}
+
+// if click plus button +price 
+
+function increaseQuantity(element) {
+  let quantity = parseInt(element.textContent);
+  quantity++;
+  element.textContent = quantity;
+  updateTotalPrice();
+}
+
+function updateTotalPrice() {
+  let orderCards = document.querySelectorAll(".order-card");
+  let totalPrice = 0;
+
+  orderCards.forEach(function (orderCard) {
+    let priceSpan = orderCard.querySelector(".PO-price");
+    let qtySpan = orderCard.querySelector("#order-qty");
+
+    let price = parseInt(priceSpan.textContent);
+    let quantity = parseInt(qtySpan.textContent);
+
+    totalPrice += price * quantity;
+  });
+
+  document.querySelector(".order-total").textContent = "Total: " + totalPrice + "$";
 }
 
 let productName = document.querySelector('#product-name');
@@ -220,9 +345,6 @@ addBtn.addEventListener("click", addProduct);
 
 let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
-
-let showOrderProductForm = document.querySelector("#display-order-form");
-showOrderProductForm.addEventListener("click", order_product);
 
 categoryView();
 renderProducts();

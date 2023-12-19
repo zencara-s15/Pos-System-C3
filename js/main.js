@@ -40,8 +40,9 @@ function renderProducts() {
       tdAmount.textContent = product.qty;
 
       let tdProgress = document.createElement('td');
-      let ProgressUP  = document.createElement('img');
-      ProgressUP.src ='../IMG/up.png';
+      let ProgressUP  = document.createElement('span');
+      ProgressUP.className = "cart material-symbols-outlined";
+      ProgressUP.textContent = "expand_less";
       tdProgress.appendChild(ProgressUP);
       
       tableRow.appendChild(tdID);
