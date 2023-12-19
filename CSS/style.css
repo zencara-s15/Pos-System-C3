@@ -116,10 +116,20 @@ th, td {
     padding: 8px;
 }
 
-td img{
+td img {
     width:20px;
     height: 20px;
     margin-left: 30px;
+}
+.delete {
+    color: red;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.edit {
+    color: blue;
+    padding-left: 20px;
+    cursor: pointer;
 }
 .product-menu{
     background-color: #547D91;
@@ -160,9 +170,13 @@ td img{
     display: flex;
     /* margin: 15vh 35% 0vh 35%; */
     border-radius: 8px;
-    box-shadow: 5px 4px 5px rgba(255, 255, 255, 0.4);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     padding: 24px;
 }
+/* .addProductForm:hover {
+    box-shadow: 10px 10px 5px rgba(85, 85, 85, 0.4);
+    transition: ease 1s;
+} */
 
 .form-title {
     font-size: 1.5rem;
