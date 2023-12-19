@@ -137,15 +137,23 @@ function renderProducts() {
 
       let tdManage = document.createElement('td');
 
-      let deleteAction = document.createElement("img");
-      deleteAction.id = i
-      deleteAction.src = '../IMG/Delete.png';
-      tdManage.appendChild(deleteAction);
-      deleteAction.addEventListener('click', removeRow);
+      // let deleteAction = document.createElement("img");
+      // deleteAction.id = i
+      // deleteAction.src = '../IMG/Delete.png';
+      // deleteAction.className = "delete";
+      // tdManage.appendChild(deleteAction);
+      let deleteBtn = document.createElement('span');
+      deleteBtn.className = "delete material-symbols-outlined";
+      deleteBtn.textContent = "delete";
+      deleteBtn.addEventListener('click', removeRow);
+      tdManage.appendChild(deleteBtn);
 
-      let editAction = document.createElement("img");
-      editAction.src = "../IMG/edit.png";
+      let editAction = document.createElement("span");
+      editAction.className = "edit material-symbols-outlined";
+      editAction.textContent = "edit_document"; 
       // editAction.addEventListener("click");
+      tdManage.appendChild(editAction);
+
       tdManage.appendChild(editAction);
 
       tableRow.appendChild(tdID);
