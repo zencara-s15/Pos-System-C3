@@ -14,6 +14,9 @@ function show(element) {
 
 let products = [];
 let categories = [];
+let update_product = []
+let totalPrice = 0;
+let quantity = 1;
 
 // Local Storage
 
@@ -28,15 +31,11 @@ function loadProducts() {
   }
 }
 
-
 // categoryView 
 function displayCategory(element) {
-
   const storedCategories = localStorage.getItem('categories');
-
   if (storedCategories !== null) {
     categories = JSON.parse(storedCategories);
-
     for (let i = 0; i < categories.length; i++) {
       let newOption = document.createElement('option');
       newOption.value = categories[i].name;
@@ -46,13 +45,64 @@ function displayCategory(element) {
   }
 }
 
+function editProduct(event) {
+  // Display the product form
+  show(addProductForm);
+  let tableRow = event.target.closest("tr");
+  let productNameTEST = tableRow.querySelector("td:nth-child(2)").textContent;
+  let productNetPriceTEST = tableRow.querySelector("td:nth-child(3)").textContent;
+  let productPriceTEST = tableRow.querySelector("td:nth-child(4)").textContent;
+  let productCategoryTEST = tableRow.querySelector("td:nth-child(5)").textContent;
+  let productQtyTEST = tableRow.querySelector("td:nth-child(6)").textContent;
+
+  productName.value = productNameTEST;
+  productNetPrice.value = productNetPriceTEST;
+  productPrice.value = parseInt(productPriceTEST.slice(0, -1));
+  console.log(productPrice);
+  productCatergory.value = productCategoryTEST;
+  productQty.value = productQtyTEST;
+
+  formTitle.textContent = "Update Product"
+  addBtn.textContent = "Update";
+  addBtn.removeEventListener("click", addProduct);
+  addBtn.addEventListener("click", updateProduct);
+
+  // Store the index of the updated product
+  update_product = Array.from(tableRow.parentNode.children).indexOf(tableRow);
+}
+function updateProduct(event) {
+  event.preventDefault();
+
+  // Retrieve the updated data from the form
+  let updatedProduct = {
+    name: productName.value,
+    net_price: productNetPrice.value,
+    price: productPrice.value,
+    category: productCatergory.value,
+    qty: productQty.value,
+    // des: productDescriptionInput.value,
+  };
+  // Update the product in the products array
+  products[update_product] = updatedProduct;
+  saveProducts();
+  clearForm();
+  
+  formTitle.textContent= "Add new Product"
+  addBtn.textContent = "Add";
+  addBtn.removeEventListener("click", updateProduct);
+  addBtn.addEventListener("click", addProduct);
+
+  // Re-render the product table
+  renderProducts();
+  location.reload();
+}
+
 function categoryView() {
   displayCategory(document.querySelector("#product-categories"))
   displayCategory(document.querySelector("#product-categories2"))
 }
 
 // clearForm after input 
-
 function clearForm() {
   productName.value = ""
   productNetPrice.value = ""
@@ -64,18 +114,19 @@ function clearForm() {
 
 // Add 
 function addProduct(event) {
-
   event.preventDefault();
 
+  formTitle.textContent = "Addd New Product"
   let existingProductIndex = products.findIndex((product) => product.name === productName.value);
 
   let newProduct = {
     name: productName.value,
+    net_price: productNetPrice.value,
     price: productPrice.value,
     category: productCatergory.value,
     qty: productQty.value,
+    des: productDescription.value
   };
-
   if (existingProductIndex !== -1) {
     let existingProduct = products[existingProductIndex];
     existingProduct.qty = Number(existingProduct.qty) + Number(newProduct.qty);
@@ -95,22 +146,21 @@ function removeRow(e) {
     e.target.closest('tr').remove();
     products.splice(e.target.id, 1)
   }
-
-  let btnRemove = document.querySelectorAll('.deleteAction');
-
-  for (let btn of btnRemove) {
-    btn.addEventListener('click', removeRow);
-
-  }
   saveProducts()
   loadProducts()
 }
 
-// show product to table 
+function removeOrderItem(e) {
+  let isRemove = window.confirm("Are you sure about that?");
+  if (isRemove) {
+    e.target.closest('.order-card').remove();
+    products.splice(e.target.id, 1)
+  }
+  updateTotalPrice()
+}
+
 let tbody = document.querySelector("tbody");
-
 function renderProducts() {
-
   let productsStorage = JSON.parse(localStorage.getItem("products"));
   if (productsStorage !== null) {
     products = productsStorage;
@@ -128,10 +178,16 @@ function renderProducts() {
       tdCategory.textContent = product.category;
 
       let tdPrice = document.createElement('td');
-      tdPrice.textContent = product.price;
+      tdPrice.textContent = product.price + "$";
+
+      let tdnetPrice = document.createElement('td');
+      tdnetPrice.textContent = product.net_price;
 
       let tdAmount = document.createElement('td');
       tdAmount.textContent = product.qty;
+
+      let tdDes = document.createElement('td');
+      tdDes.textContent = product.des;
 
       let tdManage = document.createElement('td')
       tdManage.classList.add("manage");
@@ -145,7 +201,7 @@ function renderProducts() {
       let editAction = document.createElement("span");
       editAction.className = "edit material-symbols-outlined";
       editAction.textContent = "edit_document";
-      // editAction.addEventListener("click");
+      editAction.addEventListener("click",editProduct);
       tdManage.appendChild(editAction);
 
       let cartAction = document.createElement("span");
@@ -156,8 +212,9 @@ function renderProducts() {
 
       tableRow.appendChild(tdID);
       tableRow.appendChild(tdName);
-      tableRow.appendChild(tdCategory);
+      tableRow.appendChild(tdnetPrice);
       tableRow.appendChild(tdPrice);
+      tableRow.appendChild(tdCategory);
       tableRow.appendChild(tdAmount);
       tableRow.appendChild(tdManage);
 
@@ -166,8 +223,8 @@ function renderProducts() {
   }
 
 }
-//search products
 
+//search products
 function searchProduct(event) {
   let searchText = event.target.value.toLowerCase();
   let tbody = document.getElementsByTagName("tbody")[0];
@@ -194,9 +251,13 @@ function add_product_form() {
   show(productForm)
 }
 
+// click cancelBtn to hide form 
+function hideForm (){
+  hide(productForm)
+  location.reload()
+}
+
 const order_body = document.querySelector(".order-body");
-let totalPrice = 0;
-let quantity = 1;
 
 function order_product(event) {
   hide(productForm);
@@ -207,11 +268,9 @@ function order_product(event) {
   const productName = tableRow.querySelector("td:nth-child(2)").textContent;
   const productPrice = tableRow.querySelector("td:nth-child(4)").textContent;
 
-  // Check if the product is already in the order
   const existingOrderCard = Array.from(order_body.getElementsByClassName('PO-title')).find(element => element.textContent === productName)?.closest(".order-card");
 
   if (existingOrderCard) {
-
     const orderQtySpan = existingOrderCard.querySelector("#order-qty");
     const currentQuantity = parseInt(orderQtySpan.textContent);
     const newQuantity = currentQuantity + 1;
@@ -221,10 +280,8 @@ function order_product(event) {
     totalPrice += parseInt(productPrice);
     document.querySelector(".order-total").textContent =
       "Total: " + totalPrice + "$";
-
   } else {
     // Create a new order card
-
     const orderCardDiv = document.createElement("div");
     orderCardDiv.classList.add("order-card");
 
@@ -237,7 +294,7 @@ function order_product(event) {
 
     const productPriceSpan = document.createElement("span");
     productPriceSpan.classList.add("PO-price");
-    productPriceSpan.textContent = productPrice + "$";
+    productPriceSpan.textContent = productPrice;
 
     productOrderNameDiv.appendChild(productNameSpan);
     productOrderNameDiv.appendChild(productPriceSpan);
@@ -269,15 +326,12 @@ function order_product(event) {
     const deleteOrder = document.createElement('span');
     deleteOrder.className = "deleteOrder material-symbols-outlined";
     deleteOrder.textContent = "delete";
-    deleteOrder.addEventListener('click', removeRow);
+    deleteOrder.addEventListener('click', removeOrderItem);
     removeOrder.appendChild(deleteOrder);
-
-
 
     poQtyDiv.appendChild(minusButton);
     poQtyDiv.appendChild(orderQtySpan);
     poQtyDiv.appendChild(plusButton);
-    
 
     orderCardDiv.appendChild(productOrderNameDiv);
     orderCardDiv.appendChild(poQtyDiv);
@@ -289,10 +343,9 @@ function order_product(event) {
     document.querySelector(".order-total").textContent =
       "Total: " + totalPrice + "$";
   }
-
 }
-// if click minus button -price 
 
+// if click minus button -price 
 function decreaseQuantity(element) {
   let quantity = parseInt(element.textContent);
   if (quantity > 1) {
@@ -301,9 +354,7 @@ function decreaseQuantity(element) {
     updateTotalPrice();
   }
 }
-
 // if click plus button +price 
-
 function increaseQuantity(element) {
   let quantity = parseInt(element.textContent);
   quantity++;
@@ -337,12 +388,16 @@ let productDescription = document.querySelector("#product-description");
 
 // form to add product 
 let productForm = document.querySelector(".addProductForm");
+let formTitle = document.querySelector(".form-title")
 let orderForm = document.querySelector(".order-form");
 
 // btn  and addEventlistener
 let addBtn = document.querySelector("#form-submit-btn");
 addBtn.addEventListener("click", addProduct);
+let cancelBtn = document.querySelector("#form-cancel-btn")
+cancelBtn.addEventListener("click",hideForm)
 
+// removeORder 
 let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
 

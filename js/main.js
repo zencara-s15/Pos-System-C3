@@ -1,6 +1,8 @@
 
 
 let products = [];
+// let categories = [];
+
 
 function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
@@ -13,6 +15,11 @@ function loadProducts() {
   }
 }
 
+// function categoryQty (){
+//   categories = JSON.parse(localStorage.getItem("categories"))
+//   document.querySelector("#categoryQty").textContent = categories.length()
+
+// }
 let tbody = document.querySelector("tbody");
 
 function renderProducts() {
@@ -34,7 +41,7 @@ function renderProducts() {
       tdCategory.textContent = product.category;
       
       let tdPrice = document.createElement('td');
-      tdPrice.textContent = product.price;
+      tdPrice.textContent = product.price + "$";
       
       let tdAmount = document.createElement('td');
       tdAmount.textContent = product.qty;
@@ -53,12 +60,10 @@ function renderProducts() {
 
       tableRow.appendChild(tdProgress);
       
-
-      
       tbody.appendChild(tableRow);
     }
   }
 }
-
+// categoryQty()
 renderProducts();
 loadProducts();
