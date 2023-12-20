@@ -15,6 +15,7 @@ function show(element) {
 let products = [];
 let categories = [];
 let update_product = []
+let sold_out = []
 let totalPrice = 0;
 let quantity = 1;
 
@@ -23,7 +24,9 @@ let quantity = 1;
 function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
 }
-
+function saveOrder() {
+  localStorage.setItem("sold_out", JSON.stringify(sold_out));
+}
 function loadProducts() {
   let productStorage = JSON.parse(localStorage.getItem("products"));
   if (productStorage !== null) {
@@ -86,8 +89,8 @@ function updateProduct(event) {
   products[update_product] = updatedProduct;
   saveProducts();
   clearForm();
-  
-  formTitle.textContent= "Add new Product"
+
+  formTitle.textContent = "Add new Product"
   addBtn.textContent = "Add";
   addBtn.removeEventListener("click", updateProduct);
   addBtn.addEventListener("click", addProduct);
@@ -125,7 +128,7 @@ function addProduct(event) {
     price: productPrice.value,
     category: productCatergory.value,
     qty: productQty.value,
-    des: productDescription.value
+    sold_out: [],
   };
   if (existingProductIndex !== -1) {
     let existingProduct = products[existingProductIndex];
@@ -201,7 +204,7 @@ function renderProducts() {
       let editAction = document.createElement("span");
       editAction.className = "edit material-symbols-outlined";
       editAction.textContent = "edit_document";
-      editAction.addEventListener("click",editProduct);
+      editAction.addEventListener("click", editProduct);
       tdManage.appendChild(editAction);
 
       let cartAction = document.createElement("span");
@@ -252,7 +255,7 @@ function add_product_form() {
 }
 
 // click cancelBtn to hide form 
-function hideForm (){
+function hideForm() {
   hide(productForm)
   location.reload()
 }
@@ -260,6 +263,7 @@ function hideForm (){
 const order_body = document.querySelector(".order-body");
 
 function order_product(event) {
+
   hide(productForm);
   show(orderForm);
   show(document.querySelector("#purchase-btn"));
@@ -269,7 +273,6 @@ function order_product(event) {
   const productPrice = tableRow.querySelector("td:nth-child(4)").textContent;
 
   const existingOrderCard = Array.from(order_body.getElementsByClassName('PO-title')).find(element => element.textContent === productName)?.closest(".order-card");
-
   if (existingOrderCard) {
     const orderQtySpan = existingOrderCard.querySelector("#order-qty");
     const currentQuantity = parseInt(orderQtySpan.textContent);
@@ -342,8 +345,24 @@ function order_product(event) {
     totalPrice += parseInt(productPrice);
     document.querySelector(".order-total").textContent =
       "Total: " + totalPrice + "$";
+
+    let newHistory = {
+      product_name: productName,
+      product_price: productPrice,
+      total: totalPrice + "$",
+      product_qty: quantity,
+    }
+    addToHistory(newHistory)
+    saveOrder()
   }
+
 }
+
+function addToHistory(e) {
+  sold_out.push(e)
+  // saveOrder()
+}
+
 
 // if click minus button -price 
 function decreaseQuantity(element) {
@@ -379,6 +398,15 @@ function updateTotalPrice() {
   document.querySelector(".order-total").textContent = "Total: " + totalPrice + "$";
 }
 
+function cancel_order() {
+  hide(orderForm)
+  location.reload()
+}
+function reciept() {
+  alert('Succes')
+  cancel_order()
+}
+
 let productName = document.querySelector('#product-name');
 let productNetPrice = document.querySelector("#net-price");
 let productPrice = document.querySelector("#product-price");
@@ -394,12 +422,19 @@ let orderForm = document.querySelector(".order-form");
 // btn  and addEventlistener
 let addBtn = document.querySelector("#form-submit-btn");
 addBtn.addEventListener("click", addProduct);
-let cancelBtn = document.querySelector("#form-cancel-btn")
-cancelBtn.addEventListener("click",hideForm)
 
-// removeORder 
+let cancelBtn = document.querySelector("#form-cancel-btn")
+cancelBtn.addEventListener("click", hideForm)
+
+const cancelOrder = document.querySelector("#cancelOrder")
+cancelOrder.addEventListener("click", cancel_order)
+
 let showAddProductForm = document.querySelector("#display-add-form");
 showAddProductForm.addEventListener("click", add_product_form);
+
+const purchaseBtn = document.querySelector("#purchase-btn");
+purchaseBtn.addEventListener("click", reciept)
+
 
 categoryView();
 renderProducts();

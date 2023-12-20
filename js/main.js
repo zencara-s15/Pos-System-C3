@@ -15,11 +15,6 @@ function loadProducts() {
   }
 }
 
-// function categoryQty (){
-//   categories = JSON.parse(localStorage.getItem("categories"))
-//   document.querySelector("#categoryQty").textContent = categories.length()
-
-// }
 let tbody = document.querySelector("tbody");
 
 function renderProducts() {
