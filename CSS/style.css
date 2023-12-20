@@ -23,7 +23,6 @@ body {
 #body-container {
     display: flex;
 }
-
 nav {
     width: 8%;
     background-color: #003049;
@@ -31,29 +30,23 @@ nav {
     font-weight: 500;
 }
 nav div:hover {
-    /* background-color: #547D91; */
     background-image: linear-gradient(70deg, #003049, #547D91);
 }
 nav span {
     color: white;
 }
-
 nav p {
     color: white;
 }
-
 .white {
     background-color: white;
 }
-
 .white p {
     color: #003049;
 }
-
 .white span {
     color: #003049;
 }
-
 nav div {
     list-style: none;
     display: flex;
@@ -62,18 +55,15 @@ nav div {
     padding-top: 27px;
     padding-bottom: 27px;
 }
-
 .container {
     display: flex;
     flex-direction: column;
     flex: 2;
     background-color: #ebeaea;
 }
-
 #main {
     width: 100%;
 }
-
 .nav-left {
     margin: 0;
     padding: 0;
@@ -82,13 +72,9 @@ nav div {
     display: flex;
     flex-direction: column;
 }
-
 header {
     height: 15vh;
     background-color: #003049;
-    /* display: flex; */
-
-
 }
 header h1{
     color: white;
@@ -103,39 +89,31 @@ header input[type=text] {
     margin: 20px 0 10px 30px;
     outline: none;
 }
-
 #main {
     height: 100vh;
     width: 100%;
 }
-
-/* table  */
 #product-table, #product-table-order {
     width: 100%;
     border-collapse: collapse;
 }
-
 thead {
     background: #003049;
     color: #fff;
 }
-
 th,
 td {
     border:1px solid #547D91;
     padding: 10px;
 }
-
 #product-table tr,
 td {
     padding: 0;
     text-align: center;
 }
-
 #product-table-order tbody tr td{
     padding: 10px;
 }
-
 .container #Total{
     margin: 10px;
     background-color: rgb(227, 226, 225);
@@ -143,18 +121,14 @@ td {
     border: 2px solid #000;
     padding: 10px;
     width: 150px;
-
 }
 .manage {
     display: flex;
     justify-content: space-evenly;
-
 }
-
 .manage span {
     text-align: center;
 }
-
 .delete,
 .edit,
 .cart {
@@ -164,27 +138,21 @@ td {
     color: rgb(255, 255, 255);
     margin: 0 1px 0 1px;
 }
-
 .delete {
 
     background-color: #eb0d0d;
 }
-
 .edit {
     background-color: blue;
 }
-
 .cart {
     background-color: green;
 }
-
-
 .product-menu {
     background-color: #547D91;
     display: flex;
     justify-content: center;
 }
-
 .product-menu .form-input {
     width: 40%;
     background-color: white;
@@ -194,25 +162,22 @@ td {
     border-radius: 10px;
     margin-left: 100px;
 }
-
 .product-menu .form-input:focus {
     outline: none;
     background-color: white;
 }
-
 .product-menu .form-input::placeholder {
     color: #003049;
 }
-
+#product-categories2{
+    margin-left: 620px;
+}
 .nav-left {
     background-color: #003049;
     width: 25%;
     display: flex;
     flex-direction: column;
 }
-
-/* aDdd product form ---------------------------------------------------- */
-
 .addProductForm {
     /* max-width: 400px; */
     background-color: #003049;
@@ -222,19 +187,12 @@ td {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     padding: 24px;
 }
-
-/* .addProductForm:hover {
-    box-shadow: 10px 10px 5px rgba(85, 85, 85, 0.4);
-    transition: ease 1s;
-} */
-
 .form-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
     margin-bottom: 16px;
 }
-
 .form-input {
     background-color: white;
     color: #003049;
@@ -245,19 +203,12 @@ td {
     padding: 8px;
     margin-bottom: 12px;
     outline: none;
-    /* transition: background-color 0.3s ease-in-out; */
 }
-
-/* .form-input:focus {
-    background-color: #444444;
-} */
 .btn {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-
 }
-
 .form-submit-btn,
 .form-cancel-btn {
     color: #ffffff;
@@ -268,28 +219,19 @@ td {
     cursor: pointer;
     transition: background-image 0.3s ease-in-out;
 }
-
 .form-cancel-btn {
     background-image: linear-gradient(150deg, #FF0000, #c06a6a);
     box-shadow: black 5px 5px 10px;
 }
-
 .form-submit-btn {
     background-image: linear-gradient(150deg, #003049, #5d8ca4);
     box-shadow: black 5px 5px 10px;
 }
-
-/* --------------------------------------------- */
-
-/* order form  */
 .order-form {
     background-color: #003049;
     color: #f1f1f1;
-    /* border-bottom: 2px solid white; */
     width: 100%;
-
 }
-
 .order-header {
     background-color: #003049;
     border-bottom: 1px solid white ;
@@ -298,29 +240,21 @@ td {
     align-items: center;
     justify-content: space-between;
     padding: 0 10px 0 10px;
-    /* border-radius: 0 0 10px 10px; */
-
 }
-
 .order-body {
     gap: 10px;
 }
-
 .product-order-name {
     flex: 1;
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
 }
-
 .PO-qty {
     flex: 1;
     display: flex;
     align-items: center;
 }
-
 .PO-qty button {
-
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -328,7 +262,6 @@ td {
     width: 30px;
     flex: 1;
 }
-
 #order-qty {
     border: none;
     border-radius: 7px;
@@ -344,34 +277,26 @@ td {
     flex: 0.5;
     justify-content: center;
     align-items: center;
-
 }
 .order-card {
     display: flex;
     background-color: #003049;
-    /* border: 1px solid #ffffff; */
     justify-content: space-between;
     margin: 10px 0 10px 0;
-    /* border-radius: 10px; */
     padding: 0 10px 0 10px;
 }
-
 .product-order-name {
     display: flex;
     flex-direction: column;
 }
-
 .order-total {
     height: 50px;
     background-color: #003049;
     display: flex;
     border-top: 1px solid #ffffff;
-    /* border-bottom: 1px solid white; */
     align-items: center;
     color: rgb(247, 247, 247);
-    /* border-radius: 10px 10px 0 0; */
     padding: 0 10px 0 10px;
-
 }
 #purchase-btn{
     margin-left: 30%;
@@ -392,7 +317,6 @@ button {
     border-radius: 10px;
     position: relative;
 }
-
 button::before {
     position: absolute;
     content: "";
@@ -402,30 +326,22 @@ button::before {
     z-index: -1;
     border-radius: 100%;
 }
-
-
-
 button:hover {
     color: white;
     border: 1px solid #ffffff;
 }
-
 button:before {
     top: 100%;
     left: 100%;
     transition: .5s all;
 }
-
 button:hover::before {
     top: -30px;
     left: -30px;
 }
-
-/* add dashboard */
 .count-product {
     background-color: #003049;
 }
-
 .text {
     display: flex;
     justify-content: space-evenly;
@@ -434,12 +350,10 @@ button:hover::before {
     color: white;
     font-size: x-large;
 }
-
 .heading {
     display: flex;
     justify-content: space-evenly;
 }
-
 .heading h2 {
     border: 2px solid white;
     border-radius: 10px;
@@ -447,7 +361,6 @@ button:hover::before {
     margin: 20px;
     color: white;
 }
-
 .text-top-product {
     display: flex;
     justify-content: space-evenly;

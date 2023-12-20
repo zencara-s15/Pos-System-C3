@@ -1,8 +1,7 @@
+const tbody = document.querySelector("tbody");
 
 
 let products = [];
-// let categories = [];
-
 
 function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
@@ -15,7 +14,6 @@ function loadProducts() {
   }
 }
 
-let tbody = document.querySelector("tbody");
 
 function renderProducts() {
 
@@ -24,41 +22,38 @@ function renderProducts() {
     products = productsStorage;
     for (let i = 0; i < products.length; i++) {
       let product = products[i];
+
       let tableRow = document.createElement('tr');
-      
       let tdID = document.createElement('td');
+      
       tdID.textContent = i + 1;
       
       let tdName = document.createElement('td');
-      tdName.textContent = product.name;
-      
       let tdCategory = document.createElement('td');
-      tdCategory.textContent = product.category;
-      
       let tdPrice = document.createElement('td');
-      tdPrice.textContent = product.price + "$";
-      
       let tdAmount = document.createElement('td');
-      tdAmount.textContent = product.qty;
-
       let tdProgress = document.createElement('td');
       let ProgressUP  = document.createElement('span');
+      
+      tdName.textContent = product.name;
+      tdCategory.textContent = product.category;
+      tdPrice.textContent = product.price + "$";
+      tdAmount.textContent = product.qty;
       ProgressUP.className = "cart material-symbols-outlined";
       ProgressUP.textContent = "expand_less";
-      tdProgress.appendChild(ProgressUP);
       
+      tdProgress.appendChild(ProgressUP);
       tableRow.appendChild(tdID);
       tableRow.appendChild(tdName);
       tableRow.appendChild(tdCategory);
       tableRow.appendChild(tdPrice);
       tableRow.appendChild(tdAmount);
-
       tableRow.appendChild(tdProgress);
       
       tbody.appendChild(tableRow);
     }
   }
 }
-// categoryQty()
+
 renderProducts();
 loadProducts();

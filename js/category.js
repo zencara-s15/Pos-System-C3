@@ -1,4 +1,24 @@
-// main function
+let categories = [];
+let update_category = null;
+
+const categoryName = document.querySelector("#category-name");
+const categoryId = document.querySelector("#category-id");
+const addCategoryForm = document.querySelector("#addCategoryForm");
+const addCategoryBtn = document.querySelector("#display-add-form");
+const addBtn = document.querySelector("#form-submit-btn");
+const cancelBtn = document.querySelector("#form-cancel-btn")
+
+const updateCategoryBtn = document.querySelector("#updateCategoryBtn");
+const updateCategoryId = document.querySelector("#category-id");
+const updateCategoryName = document.querySelector("#category-name");
+
+addCategoryBtn.addEventListener("click",addCategory)
+addBtn.addEventListener("click", createCategory);
+cancelBtn.addEventListener("click", cancel)
+const navleft = document.querySelector(".nav-left")
+const tbody = document.querySelector("tbody");
+
+
 function hide(element) {
     element.style.display = "none";
 }
@@ -6,12 +26,6 @@ function hide(element) {
 function show(element) {
     element.style.display = "block";
 }
-
-// Data----------------------------
-
-let categories = [];
-
-// Local Storage
 
 function saveCategory() {
     localStorage.setItem("categories", JSON.stringify(categories));
@@ -24,8 +38,14 @@ function loadCategory() {
     }
 }
 
-let categoryName = document.querySelector("#category-name");
-let categoryId = document.querySelector("#category-id");
+function addCategory(){
+    show(navleft)
+}
+
+function cancel(){
+    hide(navleft)
+    location.reload()
+}
 
 function createCategory(event) {
 
@@ -38,11 +58,7 @@ function createCategory(event) {
     saveCategory();
     location.reload();
 }
-
-let update_category = null;
-
 function editCategory(event) {
-
     show(navleft)
 
     let index = event.target.id;
@@ -57,10 +73,9 @@ function editCategory(event) {
     addBtn.removeEventListener("click", createCategory);
     addBtn.addEventListener("click", updateCategory);
 }
-
 function updateCategory(event) {
-    event.preventDefault();
 
+    event.preventDefault();
     let updatedCategory = {
         name: categoryName.value,
         id: categoryId.value,
@@ -68,29 +83,21 @@ function updateCategory(event) {
 
     categories[update_category] = updatedCategory;
 
-    saveCategory();
-
     update_category = null;
     categoryName.value = "";
     categoryId.value = "";
-
     
     addBtn.textContent = "Add";
     addBtn.removeEventListener("click", updateCategory);
     addBtn.addEventListener("click", createCategory);
-
-    // Re-render the category table
+    
+    saveCategory();
     renderCategory();
     location.reload();
 }
-function addCategory(){
-    show(navleft)
-}
 
-function cancel(){
-    hide(navleft)
-    location.reload()
-}
+
+
 function removeRow(e) {
     let isRemove = window.confirm("Are you sure about that?");
     if (isRemove) {
@@ -108,40 +115,35 @@ function removeRow(e) {
     loadCategory();
 }
 
-let tbody = document.querySelector("tbody");
-
 function renderCategory() {
     let categoryStorage = JSON.parse(localStorage.getItem("categories"));
     if (categoryStorage !== null) {
         categories = categoryStorage;
         for (let i = 0; i < categories.length; i++) {
+
             let category = categories[i];
-
             let tableRow = document.createElement("tr");
-
             let tdID = document.createElement("td");
-            tdID.textContent = category.id;
-
             let tdName = document.createElement("td");
-            tdName.textContent = category.name;
-
             let tdManage = document.createElement("td");
-            tdManage.classList.add("manage");
-
             let deleteBtn = document.createElement('span');
+            let editAction = document.createElement("span");
+            
+            tdID.textContent = category.id;
+            tdName.textContent = category.name;
+            tdManage.classList.add("manage");
+            tdManage.appendChild(deleteBtn);
+            tdManage.appendChild(editAction);
+
             deleteBtn.className = "delete material-symbols-outlined";
             deleteBtn.textContent = "delete";
             deleteBtn.addEventListener('click', removeRow);
-            tdManage.appendChild(deleteBtn);
 
-            let editAction = document.createElement("span");
             editAction.className = "edit material-symbols-outlined";
             editAction.textContent = "edit_document"; 
             editAction.id = i;
             editAction.addEventListener("click", editCategory); 
-
-            tdManage.appendChild(editAction);
-
+            
             tableRow.appendChild(tdID);
             tableRow.appendChild(tdName);
             tableRow.appendChild(tdManage);
@@ -150,23 +152,5 @@ function renderCategory() {
         }
     }
 }
-
-
-let addCategoryForm = document.querySelector("#addCategoryForm");
-let addCategoryBtn = document.querySelector("#display-add-form");
-addCategoryBtn.addEventListener("click",addCategory)
-
-let addBtn = document.querySelector("#form-submit-btn");
-addBtn.addEventListener("click", createCategory);
-let cancelBtn = document.querySelector("#form-cancel-btn")
-cancelBtn.addEventListener("click", cancel)
-
-
-let navleft = document.querySelector(".nav-left")
-
-let updateCategoryBtn = document.querySelector("#updateCategoryBtn");
-
-let updateCategoryName = document.querySelector("#category-name");
-let updateCategoryId = document.querySelector("#category-id");
 
 renderCategory();

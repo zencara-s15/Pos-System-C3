@@ -1,7 +1,10 @@
-// element
-const addProductForm = document.querySelector(".addProductForm")
+let products = [];
+let categories = [];
+let update_product = []
+let sold_out = []
+let totalPrice = 0;
+let quantity = 1;
 
-// main function
 function hide(element) {
   element.style.display = "none";
 }
@@ -10,16 +13,6 @@ function show(element) {
   element.style.display = "block";
 }
 
-// Data----------------------------
-
-let products = [];
-let categories = [];
-let update_product = []
-let sold_out = []
-let totalPrice = 0;
-let quantity = 1;
-
-// Local Storage
 
 function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
@@ -34,7 +27,6 @@ function loadProducts() {
   }
 }
 
-// categoryView 
 function displayCategory(element) {
   const storedCategories = localStorage.getItem('categories');
   if (storedCategories !== null) {
@@ -49,43 +41,41 @@ function displayCategory(element) {
 }
 
 function editProduct(event) {
-  // Display the product form
+
   show(navleft)
   show(addProductForm);
-  let tableRow = event.target.closest("tr");
-  let productNameTEST = tableRow.querySelector("td:nth-child(2)").textContent;
-  let productNetPriceTEST = tableRow.querySelector("td:nth-child(3)").textContent;
-  let productPriceTEST = tableRow.querySelector("td:nth-child(4)").textContent;
-  let productCategoryTEST = tableRow.querySelector("td:nth-child(5)").textContent;
-  let productQtyTEST = tableRow.querySelector("td:nth-child(6)").textContent;
 
-  productName.value = productNameTEST;
-  productNetPrice.value = parseInt(productNetPriceTEST.slice(0, -1));
-  productPrice.value = parseInt(productPriceTEST.slice(0, -1));
-  productCatergory.value = productCategoryTEST;
-  productQty.value = productQtyTEST;
+  let tableRow = event.target.closest("tr");
+  let productNameEdit = tableRow.querySelector("td:nth-child(2)").textContent;
+  let productNetPriceEdit = tableRow.querySelector("td:nth-child(3)").textContent;
+  let productPriceEdit = tableRow.querySelector("td:nth-child(4)").textContent;
+  let productCategoryEdit = tableRow.querySelector("td:nth-child(5)").textContent;
+  let productQtyEdit = tableRow.querySelector("td:nth-child(6)").textContent;
+
+  productName.value = productNameEdit;
+  productNetPrice.value = parseInt(productNetPriceEdit.slice(0, -1));
+  productPrice.value = parseInt(productPriceEdit.slice(0, -1));
+  productCatergory.value = productCategoryEdit;
+  productQty.value = productQtyEdit;
 
   formTitle.textContent = "Update Product"
   addBtn.textContent = "Update";
   addBtn.removeEventListener("click", addProduct);
   addBtn.addEventListener("click", updateProduct);
 
-  // Store the index of the updated product
   update_product = Array.from(tableRow.parentNode.children).indexOf(tableRow);
 }
+
 function updateProduct(event) {
   event.preventDefault();
 
-  // Retrieve the updated data from the form
   let updatedProduct = {
     name: productName.value,
     net_price: productNetPrice.value,
     price: productPrice.value,
     category: productCatergory.value,
     qty: productQty.value,
-    // des: productDescriptionInput.value,
   };
-  // Update the product in the products array
   products[update_product] = updatedProduct;
   saveProducts();
   clearForm();
@@ -95,7 +85,6 @@ function updateProduct(event) {
   addBtn.removeEventListener("click", updateProduct);
   addBtn.addEventListener("click", addProduct);
 
-  // Re-render the product table
   renderProducts();
   location.reload();
 }
@@ -105,7 +94,6 @@ function categoryView() {
   displayCategory(document.querySelector("#product-categories2"))
 }
 
-// clearForm after input 
 function clearForm() {
   productName.value = ""
   productNetPrice.value = ""
@@ -115,7 +103,6 @@ function clearForm() {
   productDescription.value = ""
 }
 
-// Add 
 function addProduct(event) {
   event.preventDefault();
 
@@ -141,7 +128,6 @@ function addProduct(event) {
   clearForm();
 }
 
-// remove products
 function removeRow(e) {
 
   let isRemove = window.confirm("Are you sure about that?");
@@ -224,10 +210,8 @@ function renderProducts() {
       tbody.appendChild(tableRow);
     }
   }
-
 }
 
-//search products
 function searchProduct(event) {
   let searchText = event.target.value.toLowerCase();
   let tbody = document.getElementsByTagName("tbody")[0];
@@ -248,23 +232,21 @@ let searchProductInput = document
   .querySelector("input");
 searchProductInput.addEventListener("keyup", searchProduct);
 
-// show add product form 
 function add_product_form() {
   show(navleft)
   hide(orderForm)
   show(productForm)
 }
 
-// click cancelBtn to hide form 
 function hideForm() {
   hide(productForm)
   location.reload()
 }
 
-const order_body = document.querySelector(".order-body");
 
 function order_product(event) {
 
+  show(navleft)
   hide(productForm);
   show(orderForm);
   show(document.querySelector("#purchase-btn"));
@@ -280,12 +262,11 @@ function order_product(event) {
     const newQuantity = currentQuantity + 1;
     orderQtySpan.textContent = newQuantity;
 
-    // Calculate the updated total price
     totalPrice += parseInt(productPrice);
     document.querySelector(".order-total").textContent =
       "Total: " + totalPrice + "$";
   } else {
-    // Create a new order card
+
     const orderCardDiv = document.createElement("div");
     orderCardDiv.classList.add("order-card");
 
@@ -356,16 +337,12 @@ function order_product(event) {
     addToHistory(newHistory)
     saveOrder()
   }
-
 }
 
 function addToHistory(e) {
   sold_out.push(e)
-  // saveOrder()
 }
 
-
-// if click minus button -price 
 function decreaseQuantity(element) {
   let quantity = parseInt(element.textContent);
   if (quantity > 1) {
@@ -374,7 +351,7 @@ function decreaseQuantity(element) {
     updateTotalPrice();
   }
 }
-// if click plus button +price 
+
 function increaseQuantity(element) {
   let quantity = parseInt(element.textContent);
   quantity++;
@@ -408,36 +385,33 @@ function reciept() {
   cancel_order()
 }
 
-let productName = document.querySelector('#product-name');
-let productNetPrice = document.querySelector("#net-price");
-let productPrice = document.querySelector("#product-price");
-let productCatergory = document.querySelector("#product-categories");
-let productQty = document.querySelector("#product-qty");
-let productDescription = document.querySelector("#product-description");
+const addProductForm = document.querySelector(".addProductForm")
+const navleft = document.querySelector(".nav-left")
 
-// form to add product 
-let productForm = document.querySelector(".addProductForm");
-let formTitle = document.querySelector(".form-title")
-let orderForm = document.querySelector(".order-form");
+const productName = document.querySelector('#product-name');
+const productNetPrice = document.querySelector("#net-price");
+const productPrice = document.querySelector("#product-price");
+const productCatergory = document.querySelector("#product-categories");
+const productQty = document.querySelector("#product-qty");
+const productDescription = document.querySelector("#product-description");
 
-// btn  and addEventlistener
-let addBtn = document.querySelector("#form-submit-btn");
-addBtn.addEventListener("click", addProduct);
+const order_body = document.querySelector(".order-body");
 
-let cancelBtn = document.querySelector("#form-cancel-btn")
-cancelBtn.addEventListener("click", hideForm)
+const productForm = document.querySelector(".addProductForm");
+const formTitle = document.querySelector(".form-title")
+const showAddProductForm = document.querySelector("#display-add-form");
+const orderForm = document.querySelector(".order-form");
 
-const cancelOrder = document.querySelector("#cancelOrder")
-cancelOrder.addEventListener("click", cancel_order)
-
-let navleft = document.querySelector(".nav-left")
-let showAddProductForm = document.querySelector("#display-add-form");
-
-showAddProductForm.addEventListener("click", add_product_form);
-
+const addBtn = document.querySelector("#form-submit-btn");
+const cancelBtn = document.querySelector("#form-cancel-btn")
+const cancelOrderBtn = document.querySelector("#cancelOrder")
 const purchaseBtn = document.querySelector("#purchase-btn");
-purchaseBtn.addEventListener("click", reciept)
 
+addBtn.addEventListener("click", addProduct);
+cancelBtn.addEventListener("click", hideForm)
+cancelOrderBtn.addEventListener("click", cancel_order)
+purchaseBtn.addEventListener("click", reciept)
+showAddProductForm.addEventListener("click", add_product_form);
 
 categoryView();
 renderProducts();
