@@ -10,6 +10,9 @@ function renderOrder() {
 
         let tableRow = document.createElement('tr');
 
+        let tdList = document.createElement('td');
+        tdList.textContent = [i+1];
+
         let tdName = document.createElement('td');
         tdName.textContent = soldOutData[i].product_name;
 
@@ -19,6 +22,7 @@ function renderOrder() {
         let tdQty = document.createElement('td');
         tdQty.textContent = soldOutData[i].product_qty;
 
+        tableRow.appendChild(tdList);
         tableRow.appendChild(tdName);
         tableRow.appendChild(tdPrice);
         tableRow.appendChild(tdQty);

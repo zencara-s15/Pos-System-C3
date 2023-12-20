@@ -59,9 +59,8 @@ function editProduct(event) {
   let productQtyTEST = tableRow.querySelector("td:nth-child(6)").textContent;
 
   productName.value = productNameTEST;
-  productNetPrice.value = productNetPriceTEST;
+  productNetPrice.value = parseInt(productNetPriceTEST.slice(0, -1));
   productPrice.value = parseInt(productPriceTEST.slice(0, -1));
-  console.log(productPrice);
   productCatergory.value = productCategoryTEST;
   productQty.value = productQtyTEST;
 
@@ -184,7 +183,7 @@ function renderProducts() {
       tdPrice.textContent = product.price + "$";
 
       let tdnetPrice = document.createElement('td');
-      tdnetPrice.textContent = product.net_price;
+      tdnetPrice.textContent = product.net_price + "$";
 
       let tdAmount = document.createElement('td');
       tdAmount.textContent = product.qty;
