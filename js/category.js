@@ -28,6 +28,7 @@ let categoryName = document.querySelector("#category-name");
 let categoryId = document.querySelector("#category-id");
 
 function createCategory(event) {
+
     event.preventDefault();
 
     let newCategory = {};
@@ -42,7 +43,7 @@ let update_category = null;
 
 function editCategory(event) {
 
-    
+    show(navleft)
 
     let index = event.target.id;
     update_category = index;
@@ -51,6 +52,8 @@ function editCategory(event) {
     categoryId.value = categories[update_category].id;
 
     addBtn.textContent = "Update";
+    document.querySelector(".form-title").textContent = "Update Category"
+
     addBtn.removeEventListener("click", createCategory);
     addBtn.addEventListener("click", updateCategory);
 }
@@ -71,6 +74,7 @@ function updateCategory(event) {
     categoryName.value = "";
     categoryId.value = "";
 
+    
     addBtn.textContent = "Add";
     addBtn.removeEventListener("click", updateCategory);
     addBtn.addEventListener("click", createCategory);
@@ -79,7 +83,14 @@ function updateCategory(event) {
     renderCategory();
     location.reload();
 }
+function addCategory(){
+    show(navleft)
+}
 
+function cancel(){
+    hide(navleft)
+    location.reload()
+}
 function removeRow(e) {
     let isRemove = window.confirm("Are you sure about that?");
     if (isRemove) {
@@ -142,9 +153,16 @@ function renderCategory() {
 
 
 let addCategoryForm = document.querySelector("#addCategoryForm");
+let addCategoryBtn = document.querySelector("#display-add-form");
+addCategoryBtn.addEventListener("click",addCategory)
 
 let addBtn = document.querySelector("#form-submit-btn");
 addBtn.addEventListener("click", createCategory);
+let cancelBtn = document.querySelector("#form-cancel-btn")
+cancelBtn.addEventListener("click", cancel)
+
+
+let navleft = document.querySelector(".nav-left")
 
 let updateCategoryBtn = document.querySelector("#updateCategoryBtn");
 

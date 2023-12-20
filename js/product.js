@@ -50,6 +50,7 @@ function displayCategory(element) {
 
 function editProduct(event) {
   // Display the product form
+  show(navleft)
   show(addProductForm);
   let tableRow = event.target.closest("tr");
   let productNameTEST = tableRow.querySelector("td:nth-child(2)").textContent;
@@ -249,6 +250,7 @@ searchProductInput.addEventListener("keyup", searchProduct);
 
 // show add product form 
 function add_product_form() {
+  show(navleft)
   hide(orderForm)
   show(productForm)
 }
@@ -428,7 +430,9 @@ cancelBtn.addEventListener("click", hideForm)
 const cancelOrder = document.querySelector("#cancelOrder")
 cancelOrder.addEventListener("click", cancel_order)
 
+let navleft = document.querySelector(".nav-left")
 let showAddProductForm = document.querySelector("#display-add-form");
+
 showAddProductForm.addEventListener("click", add_product_form);
 
 const purchaseBtn = document.querySelector("#purchase-btn");
